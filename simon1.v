@@ -5,23 +5,42 @@ module simon1 (clock, reset, in, out);
 // B 10
 // Y 11
 
-   	input [1:0] in;
-	input clock;
-	input [1:0] reset;
-	output [1:0] out;
+	localparam [4]
+		R = 0,
+		G = 1,
+		B = 2,
+		Y = 3;
 
-	wire [1:0] in;
-	wire [1:0] reset;	
-	wire clock;
-	wire [1:0] out;
+   	input wire [1:0] in;
+	input wire clock;
+	input wire reset;
+	output reg [1:0] out;
 
-	always @ (posedge clock)
+		
+
+
+	always @ (posedge clock, posedge reset) 
 	begin
-		assign out = 2'b00;
-		if(in === reset)
-			assign out = 2'b10;
+		if(reset)
+
+	end
+
+	always @ (in) begin
+	temp = in; //attacker's in
+
+		assign out = 2'dX;
+		
+				
+			
+		// if the input is invalid
+		if (in == 2'dX || in == 2'dZ)
+			assign out = 2'dX;
+
 		else
-			assign out = 2'b01;
+			if(in === temp) //player's in
+				assign out = 2'b10;
+			else
+				assign out = 2'b01;
 	end			
 
 // out:
