@@ -13,12 +13,12 @@ wire [1:0] out;
 
 
 initial begin
-  // clock =
-  // reset =
-  // in =
+  clock = 1;
+  reset = 0;
+  in = 2'b01;
   $display("Starting simulation...");
   #50;
-  // if (out !== xxxx) $display("xxxxx");
+  if (out !== 2'b01) $display("fuck");
   #50;
   $display("Done...");
   $finish;

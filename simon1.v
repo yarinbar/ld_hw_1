@@ -35,26 +35,29 @@ module simon1 (clock, reset, in, out);
 	always @ (in, state) begin
 		
 		// if input is invaid we change output to "dont care"		
-		if(in == 2'dX || in == 2'dZ)
+		if(in == 2'dX || in == 2'dZ) begin
 			// out = X
 			assign out = 2'dX;
-
-
-		if(state == init)
+		end
+		
+		else if(state == init) begin
 			state <= in;
+		end
 	
 	
-		else 	
-			if(state == in)
-			   	// out = 1
-				assign out = 2'b10;
-				state <= win;
+		else if(state == in) begin
+		   	// out = 1
+			assign out = 2'b10;
+			state <= win;
+		end
 
-			else begin
-				// out = 0
-				assign out = 2'b01;
-				state <= lose;
-			end
+		else begin 
+			// out = 0
+			assign out = 2'b01;
+			state <= lose;
+		end
+
+		
 	end
 
 // out:
