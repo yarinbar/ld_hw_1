@@ -21,43 +21,85 @@ module simon1 (clock, reset, in, out);
 		init = 3'b100,
 		lose = 3'b101,
 		win  = 3'b110;
+	
+	
+	initial begin
+		state <= init;
+	end
+
 
 	always @ (posedge clock, posedge reset)	begin
 		
 		if(reset)
 			// change to initial state
 			state <= init;
-			assign out = 2'dX;
+
+		else
+			state <= next_state;
 	
 	end
 
 
 	always @ (in, state) begin
 		
-		// if input is invaid we change output to "dont care"		
-		if(in == 2'dX || in == 2'dZ) begin
-			// out = X
-			assign out = 2'dX;
-		end
-		
-		else if(state == init) begin
-			state <= in;
-		end
-	
-	
-		else if(state == in) begin
-		   	// out = 1
-			assign out = 2'b10;
-			state <= win;
-		end
+		case (state)
+			init: begin
+				next_state <= in;
+				out = 2'b00;
+			end
+			
+			R: begin
+				if (in == state) begin
+					next_state <= win;
+					out = 2'b10;
+				end
+				else begin 
+					next_state <= lose;
+					out = 2'b01;
+				end
+			end		
 
-		else begin 
-			// out = 0
-			assign out = 2'b01;
-			state <= lose;
-		end
+			G: begin
+				if (in == state) begin
+					next_state <= win;
+					out = 2'b10;
+				end
+				else begin
+					next_state <= lose;
+					out = 2'b01;
+				end
+			end
 
-		
+			B: begin
+				if (in == state) begin
+					next_state <= win;
+					out = 2'b10;
+				end
+				else  begin
+					next_state <= lose;
+					out = 2'b01;
+				end
+			end	
+			
+			Y: begin
+				if (in == state) begin
+					next_state <= win;
+					out = 2'b10;
+				end
+				else begin 
+					next_state <= lose;
+					out = 2'b01;
+				end
+			end
+			
+			win: begin
+
+			end		
+
+			lose: begin
+			end
+		endcase
+
 	end
 
 // out:
