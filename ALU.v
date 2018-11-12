@@ -34,7 +34,7 @@ module ALU (a, b, alu_control, out);
 				out = a ^ b;
 			end
 
-		default : out=32'bX;
+			default : out=32'bX;
 		endcase
 	end
  
