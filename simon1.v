@@ -93,7 +93,6 @@ module simon1 (clock, reset, in, out);
 			end
 			
 			win: begin
-
 			end		
 
 			lose: begin
